@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для самой прекрасной</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playwrite+NZ+Basic:wght@100..400&family=Space+Grotesk:wght@300..700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #fff5f7, #ffe9ef);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Playwrite NZ Basic", cursive;
+            overflow: hidden;
+            position: relative;
+        }
+
+        button,
+        .open-btn,
+        .yes,
+        .no,
+        .choice-btn {
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        .card {
+            background: transparent;
+            padding: 0;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 300px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+        }
+
+        .envelope {
+            background: #f8c8d8;
+            padding: 30px 25px 60px 25px;
+            border-radius: 30px;
+            position: relative;
+            border: 1px solid #e7a7b8;
+            box-shadow:
+                0 15px 35px rgba(214, 112, 140, 0.25),
+                inset 0 0 25px rgba(255, 255, 255, 0.6);
+        }
+
+        .lines-container {
+            position: relative;
+            width: 100%;
+            height: 110px;
+            margin-bottom: 5px;
+        }
+
+        .left-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 55%;
+            height: 2px;
+            transform: rotate(30deg);
+            transform-origin: top left;
+            background: rgba(168, 64, 96, 0.25);
+            box-shadow: 0 0 6px rgba(168, 64, 96, 0.2);
+        }
+
+        .right-line {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 55%;
+            height: 2px;
+            transform: rotate(-30deg);
+            transform-origin: top right;
+            background: rgba(168, 64, 96, 0.25);
+            box-shadow: 0 0 6px rgba(168, 64, 96, 0.2);
+        }
+
+        .center-heart {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 38px;
+            z-index: 15;
+            color: #b03052;
+            text-shadow: 0 4px 12px rgba(176, 48, 82, 0.4);
+            filter: drop-shadow(0 2px 6px #ffa5b9);
+            line-height: 1;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(2px);
+        }
+
+        h1 {
+            color: #9e2a4d;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin: 15px 0;
+            font-family: "Playwrite NZ Basic", cursive;
+        }
+
+        .love {
+            position: absolute;
+            top: 95px;
+            left: 52%;
+            transform: translateX(-50%);
+            font-family: "Dancing Script", cursive;
+            font-size: 20px;
+            color: white;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 182, 193, 0.5);
+            letter-spacing: 8px;
+            white-space: nowrap;
+            z-index: 20;
+            opacity: 0.9;
+        }
+
+        .open-btn {
+            background: #c44569;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 22px rgba(196, 69, 105, 0.4);
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .open-btn:hover {
+            background: #a83258;
+            transform: scale(1.05);
+            box-shadow: 0 10px 26px rgba(168, 50, 88, 0.5);
+        }
+
+        #secret {
+            margin-top: 20px;
+            padding-top: 20px;
+        }
+
+        .divider {
+            position: relative;
+            margin: 30px 0;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        .divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            border-top: 2px dashed #d88;
+            z-index: 0;
+        }
+
+        .divider-heart {
+            position: relative;
+            background: transparent;
+            padding: 0 12px;
+            font-size: 30px;
+            z-index: 1;
+        }
+
+        .simple-heart {
+            font-size: 40px;
+            margin: 20px 0;
+            color: #ff4d6d;
+            text-shadow: 0 2px 10px rgba(255, 77, 109, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .mini-heart-image {
+            width: 60px;
+            height: 60px;
+            margin: 15px auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(17, 17, 17, 0.4);
+            border-radius: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .heart-decoration {
+            position: absolute;
+            font-size: 24px;
+            z-index: 2;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .heart-1 {
+            top: -15px;
+            left: 10%;
+            color: #ff4d6d;
+            animation-delay: 0s;
+        }
+
+        .heart-2 {
+            bottom: -15px;
+            right: 5%;
+            color: #ff85a1;
+            font-size: 28px;
+            animation-delay: 0.5s;
+        }
+
+        .heart-3 {
+            top: 20%;
+            right: -10px;
+            color: #ffb3c6;
+            font-size: 22px;
+            animation-delay: 1s;
+        }
+
+        .heart-4 {
+            bottom: 30%;
+            left: -10px;
+            color: #ff5c8a;
+            font-size: 26px;
+            animation-delay: 1.5s;
+            transform: rotate(-10deg);
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        .letter-text {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            padding: 16px 18px;
+            margin: 12px 0;
+            font-weight: 400;
+            color: #000;
+            font-size: 1rem;
+            line-height: 1.5;
+            box-shadow: 0 4px 12px rgba(255, 150, 170, 0.2);
+            border: 1px solid #ffc1cf;
+            font-family: "Playwrite NZ Basic", cursive;
+        }
+
+        .letter-text b {
+            color: #ff1a4c;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        button {
+            padding: 12px 30px;
+            margin: 10px 8px;
+            font-size: 18px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.2s;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .yes {
+            background: #c44569;
+            color: white;
+            box-shadow: 0 5px 15px rgba(196, 69, 105, 0.4);
+            padding: 18px 38px;
+            font-size: 18px;
+            font-weight: 500;
+            margin-right: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .yes:hover {
+            background: #a83258;
+        }
+
+        .no {
+            background-color: #ffffff;
+            color: #4e4e4e;
+            padding: 14px 32px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .no:hover {
+            background-color: #f8f0f2;
+        }
+
+        .choice-btn {
+            background: #c44569;
+            color: white;
+            box-shadow: 0 5px 15px rgba(196, 69, 105, 0.4);
+            padding: 18px 38px;
+            font-size: 18px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin: 10px auto;
+        }
+
+        .choice-btn:hover {
+            background: #a83258;
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .heart {
+            position: fixed;
+            bottom: -50px;
+            font-size: 22px;
+            color: #ff8da1;
+            opacity: 0.5;
+            animation: rise 30s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+            user-select: none;
+            filter: blur(0.3px);
+            will-change: transform;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            5% {
+                opacity: 0.5;
+            }
+            95% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-120vh) rotate(5deg);
+                opacity: 0;
+            }
+        }
+
+        .fade-out {
+            animation: fadeOut 0.4s ease forwards !important;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease forwards !important;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .no-animation {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div id="introBlock">
+            <div class="envelope">
+                <div class="lines-container">
+                    <div class="left-line"></div>
+                    <div class="right-line"></div>
+                    <div class="center-heart">💌</div>
+                    <div class="love">Love</div>
+                </div>
+            </div>
+            <h1 style="margin-top:25px;">У меня для тебя письмо...</h1>
+            <button class="open-btn" onclick="openSecret()">Далее ➝</button>
+        </div>
+
+        <div id="secret" class="hidden">
+            <div id="openQuestionBlock">
+                <div class="divider">
+                    <span class="divider-heart">💌</span>
+                </div>
+                <h3 style="color:#000; margin-bottom:15px; font-weight: 400;">
+                    Хочешь открыть? (´｡• ω •｡`)
+                </h3>
+                <div class="image-container">
+                    <img src="assets/Kitty2.gif" alt="gif">
+                    <div class="heart-decoration heart-1">💘</div>
+                    <div class="heart-decoration heart-2">💗</div>
+                    <div class="heart-decoration heart-3">💗</div>
+                    <div class="heart-decoration heart-4">💖</div>
+                </div>
+                <button class="yes" onclick="openLetter()">Открыть</button>
+                <button class="no" onclick="openNo()">Не-а</button>
+            </div>
+
+            <div id="openRetryBlock" class="hidden">
+                <div class="divider">
+                    <span class="divider-heart">💔</span>
+                </div>
+                <div class="image-container">
+                    <img src="assets/SadKitty.gif" alt="sad gif">
+                    <div class="heart-decoration heart-2">💔</div>
+                    <div class="heart-decoration heart-3">💔</div>
+                    <div class="heart-decoration heart-4">💔</div>
+                </div>
+                <h2 style="color:#000; margin-bottom:20px; font-weight: 400;">
+                    Ну пожалуйста...<br>
+                    Давай ещё раз?(＞＜)
+                </h2>
+                <button class="choice-btn" onclick="retryOpen()">Еще раз..?</button>
+            </div>
+
+            <div id="proposalBlock" class="hidden">
+                <img src="assets/Heart2.gif" alt="heart" class="mini-heart-image">
+                <h3 style="color:#000; margin:15px 0; font-weight: 400;">
+                    Ты будешь моей валентинкой?
+                </h3>
+                <div class="image-container">
+                    <img src="assets/Hmm.gif" alt="gif">
+                    <div class="heart-decoration heart-1">💘</div>
+                    <div class="heart-decoration heart-2">💗</div>
+                    <div class="heart-decoration heart-3">💗</div>
+                    <div class="heart-decoration heart-4">💖</div>
+                </div>
+                <button class="yes" onclick="proposalYes()">Да♡</button>
+                <button class="no" onclick="proposalNo()">Нет</button>
+            </div>
+
+            <div id="proposalYesBlock" class="hidden">
+                <img src="assets/heart.gif" alt="heart" class="mini-heart-image">
+                <h3 style="color:#000; margin-bottom:15px; font-weight: 400;">
+                    Люблю тебя очень сильно 💞
+                </h3>
+                <div class="image-container">
+                    <img src="assets/LoveKitty.gif" alt="happy gif">
+                    <div class="heart-decoration heart-1">❤️</div>
+                    <div class="heart-decoration heart-2">💖</div>
+                    <div class="heart-decoration heart-3">💗</div>
+                    <div class="heart-decoration heart-4">💓</div>
+                </div>
+            </div>
+
+            <div id="proposalNoBlock" class="hidden">
+                <div class="simple-heart">❣</div>
+                <h3 style="color:#000; margin-bottom:15px; font-weight: 400;">
+                    Может хочешь все таки? (^ω^)
+                </h3>
+                <div class="image-container">
+                    <img src="assets/CrazyKitty.gif" alt="sad gif">
+                    <div class="heart-decoration heart-2">🤍</div>
+                    <div class="heart-decoration heart-3">🤍</div>
+                    <div class="heart-decoration heart-4">🤍</div>
+                </div>
+                <button class="choice-btn" onclick="retryProposal()">Подумаю...</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function resetAnimation(element) {
+            element.classList.remove('fade-in', 'fade-out', 'no-animation');
+            void element.offsetWidth;
+        }
+
+        function openSecret() {
+            const intro = document.getElementById("introBlock");
+            const secret = document.getElementById("secret");
+            const openQuestion = document.getElementById("openQuestionBlock");
+
+            resetAnimation(intro);
+            resetAnimation(secret);
+            resetAnimation(openQuestion);
+
+            intro.classList.add("fade-out");
+
+            setTimeout(() => {
+                intro.classList.add("hidden");
+                secret.classList.remove("hidden");
+                openQuestion.classList.remove("hidden");
+                resetAnimation(openQuestion);
+                openQuestion.classList.add("fade-in");
+            }, 380);
+        }
+
+        function openLetter() {
+            const openQuestion = document.getElementById("openQuestionBlock");
+            const proposal = document.getElementById("proposalBlock");
+
+            resetAnimation(openQuestion);
+            resetAnimation(proposal);
+
+            openQuestion.classList.add("fade-out");
+
+            setTimeout(() => {
+                openQuestion.classList.add("hidden");
+                proposal.classList.remove("hidden");
+                resetAnimation(proposal);
+                proposal.classList.add("fade-in");
+            }, 380);
+        }
+
+        function openNo() {
+            const openQuestion = document.getElementById("openQuestionBlock");
+            const openRetry = document.getElementById("openRetryBlock");
+
+            resetAnimation(openQuestion);
+            resetAnimation(openRetry);
+
+            openQuestion.classList.add("fade-out");
+
+            setTimeout(() => {
+                openQuestion.classList.add("hidden");
+                openRetry.classList.remove("hidden");
+                resetAnimation(openRetry);
+                openRetry.classList.add("fade-in");
+            }, 380);
+        }
+
+        function retryOpen() {
+            const openRetry = document.getElementById("openRetryBlock");
+            const openQuestion = document.getElementById("openQuestionBlock");
+
+            resetAnimation(openRetry);
+            resetAnimation(openQuestion);
+
+            openRetry.classList.add("fade-out");
+
+            setTimeout(() => {
+                openRetry.classList.add("hidden");
+                openQuestion.classList.remove("hidden");
+                resetAnimation(openQuestion);
+                openQuestion.classList.add("fade-in");
+            }, 380);
+        }
+
+        function proposalYes() {
+            const proposal = document.getElementById("proposalBlock");
+            const yesBlock = document.getElementById("proposalYesBlock");
+
+            resetAnimation(proposal);
+            resetAnimation(yesBlock);
+
+            proposal.classList.add("fade-out");
+
+            setTimeout(() => {
+                proposal.classList.add("hidden");
+                yesBlock.classList.remove("hidden");
+                resetAnimation(yesBlock);
+                yesBlock.classList.add("fade-in");
+            }, 380);
+        }
+
+        function proposalNo() {
+            const proposal = document.getElementById("proposalBlock");
+            const noBlock = document.getElementById("proposalNoBlock");
+
+            resetAnimation(proposal);
+            resetAnimation(noBlock);
+
+            proposal.classList.add("fade-out");
+
+            setTimeout(() => {
+                proposal.classList.add("hidden");
+                noBlock.classList.remove("hidden");
+                resetAnimation(noBlock);
+                noBlock.classList.add("fade-in");
+            }, 380);
+        }
+
+        function retryProposal() {
+            const noBlock = document.getElementById("proposalNoBlock");
+            const proposal = document.getElementById("proposalBlock");
+
+            resetAnimation(noBlock);
+            resetAnimation(proposal);
+
+            noBlock.classList.add("fade-out");
+
+            setTimeout(() => {
+                noBlock.classList.add("hidden");
+                proposal.classList.remove("hidden");
+                resetAnimation(proposal);
+                proposal.classList.add("fade-in");
+            }, 380);
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 6; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement("div");
+                    heart.classList.add("heart");
+                    heart.innerHTML = "💕";
+                    heart.style.left = Math.random() * 100 + "vw";
+                    heart.style.fontSize = (18 + Math.random() * 20) + "px";
+                    heart.style.animationDuration = (25 + Math.random() * 10) + "s";
+                    heart.style.animationDelay = (Math.random() * 5) + "s";
+                    heart.style.opacity = 0.3 + Math.random() * 0.3;
+                    document.body.appendChild(heart);
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.remove();
+                    }, 40000);
+                }, i * 150);
+            }
+        }
+
+        setInterval(createHearts, 6000);
+        createHearts();
+    </script>
+</body>
+</html>
