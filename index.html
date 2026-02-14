@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Для самой прекрасной</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: "Playwrite NZ Basic", "Pacifico", "Comic Sans MS", "Bradley Hand", cursive !important;
+            font-family: "Playwrite NZ Basic", cursive;
             overflow: hidden;
             position: relative;
         }
@@ -31,11 +31,7 @@
         .yes,
         .no,
         .choice-btn {
-            font-family: "Space Grotesk", "Arial", "Helvetica", sans-serif !important;
-        }
-
-        h1, h2, h3, p, span, div, .love, .letter-text, .main-text {
-            font-family: "Playwrite NZ Basic", "Pacifico", "Comic Sans MS", "Bradley Hand", cursive !important;
+            font-family: "Space Grotesk", sans-serif;
         }
 
         .card {
@@ -118,6 +114,7 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             margin: 15px 0;
+            font-family: "Playwrite NZ Basic", cursive;
         }
 
         .love {
@@ -125,7 +122,7 @@
             top: 95px;
             left: 52%;
             transform: translateX(-50%);
-            font-family: "Dancing Script", "Brush Script MT", cursive !important;
+            font-family: "Dancing Script", cursive;
             font-size: 20px;
             color: white;
             text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 182, 193, 0.5);
@@ -291,6 +288,7 @@
             line-height: 1.5;
             box-shadow: 0 4px 12px rgba(255, 150, 170, 0.2);
             border: 1px solid #ffc1cf;
+            font-family: "Playwrite NZ Basic", cursive;
         }
 
         .letter-text b {
@@ -527,22 +525,6 @@
     </div>
 
     <script>
-        // Принудительная перезагрузка шрифтов для мобильных
-        if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            document.documentElement.style.webkitFontSmoothing = 'antialiased';
-            // Принудительное применение шрифтов
-            const style = document.createElement('style');
-            style.innerHTML = `
-                body, h1, h2, h3, p, span, div, .love, .letter-text {
-                    font-family: "Playwrite NZ Basic", "Pacifico", "Comic Sans MS", cursive !important;
-                }
-                button, .open-btn, .yes, .no, .choice-btn {
-                    font-family: "Space Grotesk", "Arial", sans-serif !important;
-                }
-            `;
-            document.head.appendChild(style);
-        }
-
         function resetAnimation(element) {
             element.classList.remove('fade-in', 'fade-out', 'no-animation');
             void element.offsetWidth;
